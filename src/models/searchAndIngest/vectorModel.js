@@ -2,7 +2,7 @@
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/sequelize');
-const CompanyDocument = require('./documents');
+const CompanyDocument = require('./companyDocumentModel');
 
 const Vector = sequelize.define('Vector', {
     id: {

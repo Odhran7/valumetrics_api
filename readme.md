@@ -1,0 +1,1 @@
+Run 'npm run init-db' to set up and sync to database
