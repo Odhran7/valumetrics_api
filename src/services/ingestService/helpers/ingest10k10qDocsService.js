@@ -68,7 +68,8 @@ const ingest10K10QDocsService = async (ticker) => {
               company_id,
               "10-Q",
               year,
-              link
+              link.html,
+              link.month
             );
             const itemNumbersConverted = Object.keys(itemDict10Q);
             return await retrieveItemAndFormatUtil(

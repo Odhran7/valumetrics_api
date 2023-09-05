@@ -12,6 +12,8 @@ const https = require("https");
 const zlib = require("zlib");
 const createDocumentWithMetadataUtil = require("../../../utils/ingest/createDocumentWithMetadataUtil");
 
+// This function ingests the 13f docs
+
 const ingest13FDocsService = async (ticker) => {
   try {
     const companyObject =
@@ -30,7 +32,8 @@ const ingest13FDocsService = async (ticker) => {
                 company_id,
                 "13-F",
                 year,
-                link
+                link.html,
+                link.month,
               );
               const content = await get13FContent(link.txt);
               return await retrieveItemAndFormat13F(
@@ -55,12 +58,14 @@ const ingest13FDocsService = async (ticker) => {
 
     if (documentsWithMetadata.length) {
       documentsWithMetadata = filterValidDocsUtil(documentsWithMetadata);
-      await ingestDocs(documentsWithMetadata);
+      const result = await ingestDocs(documentsWithMetadata);
     }
   } catch (error) {
     console.error(`Error processing 13F for ${ticker}: ${error.message}`);
   }
 };
+
+// This function gets the data from the .txt link and parses the 'useful' part of it
 
 const get13FContent = async (url) => {
   try {
@@ -85,6 +90,8 @@ const get13FContent = async (url) => {
     throw error;
   }
 };
+
+// This function gets the data and parses it correctly 
 
 const getData = (url) => {
   return limiter.schedule(() => {
@@ -125,6 +132,8 @@ const getData = (url) => {
     });
   });
 };
+
+// Function creates the document and metadata for 13f filing
 
 const retrieveItemAndFormat13F = async (
   link,

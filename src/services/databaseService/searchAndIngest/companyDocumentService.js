@@ -1,6 +1,6 @@
 // Service will be used to handle the creation and retrievel of company documents
 
-const { CompanyDocument, Company } = require("../../../models");
+const { CompanyDocument } = require("../../../models");
 
 // Function used to create a company document
 

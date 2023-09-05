@@ -1,4 +1,4 @@
-// DB manager
+// Config file for sequelize
 
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');

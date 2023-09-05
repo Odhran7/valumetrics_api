@@ -1,8 +1,6 @@
 // This service is used to ingest content into the vector db
 
 const { pineconeClient } = require("../../../../config/pinecone");
-const { databaseServices } = require("../../index");
-const keywordExtractionUtil = require("../../../utils/ingest/keywordExtractionUtil");
 const { OpenAIEmbeddings } = require("langchain/embeddings/openai");
 const {
   prepareDocumentForIngestionUtil,

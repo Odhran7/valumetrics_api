@@ -27,7 +27,7 @@ const getCompanyById = async (id) => {
 
 // Function used to get company id by ticker
 
-const getCompanyTickerById = async (ticker) => {
+const getCompanyByTicker = async (ticker) => {
   try {
     const company = Company.findAll({
         where: {
@@ -46,5 +46,5 @@ const getCompanyTickerById = async (ticker) => {
 module.exports = {
   createCompany,
   getCompanyById,
-  getCompanyTickerById,
+  getCompanyByTicker,
 };

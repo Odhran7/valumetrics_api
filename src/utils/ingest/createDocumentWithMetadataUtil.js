@@ -1,3 +1,5 @@
+// This util given metadata splits the docs up
+
 const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const { Document } = require("langchain/document");
 

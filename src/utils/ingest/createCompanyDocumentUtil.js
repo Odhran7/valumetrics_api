@@ -2,15 +2,15 @@
 
 const { databaseServices } = require('../../models/')
 
-const createCompanyDocument = async (company_id, type, year, link) => {
+const createCompanyDocument = async (company_id, type, year, link, month) => {
     try {
       const companyObject = await databaseServices.companyServices.createCompany({
         company_id: company_id,
         document_type: type,
         year: year,
         upload_timestamp: new Date(),
-        link: link.html,
-        month: link.month,
+        link: link,
+        month: month,
       });
       return companyObject.id;
     } catch (error) {

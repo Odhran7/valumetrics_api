@@ -112,7 +112,8 @@ const ingest8KDocsService = async (ticker) => {
               company_id,
               "8-K",
               year,
-              link
+              link.html,
+              link.month,
             );
             const itemNumbersConverted = link.itemNumbers.map(
               (item) => itemDict8K[item]
