@@ -7,6 +7,10 @@ const { ingestTemplateController } = require("./ingestTemplateController");
 
 // Create the controllers
 
+// GET /api/v1/ingest/ticker=YOUR_TICKER_VALUE
+
+const ingestController = require('./ingestController');
+
 // GET /api/v1/ingest/8k/ticker=YOUR_TICKER_VALUE
 
 const ingest8kController = ingestTemplateController(
@@ -35,9 +39,17 @@ const ingestEarningsTranscriptController = ingestTemplateController(
   "earnings transcript"
 );
 
-// GET /api/v1/ingest/patents/ticker=YOUR_TICKER_VALUE
+
+// GET /api/v1/ingest/news/ticker=YOUR_TICKER_VALUE
 
 const ingestNewsController = ingestTemplateController(
+    ingestServices.ingestNewsService,
+    "news"
+  );
+
+// GET /api/v1/ingest/patents/ticker=YOUR_TICKER_VALUE
+
+const ingestPatentsController = ingestTemplateController(
   ingestServices.ingestPatentsService,
   "patents"
 );
@@ -48,4 +60,5 @@ module.exports = {
   ingest13fController,
   ingestEarningsTranscriptController,
   ingestNewsController,
+  ingestPatentsController
 };
