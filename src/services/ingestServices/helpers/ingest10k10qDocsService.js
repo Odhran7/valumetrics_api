@@ -8,6 +8,7 @@ const {
   filterValidDocsUtil,
 } = require("../../../utils/ingest/formatDocsIngestUtil");
 const retrieveItemAndFormatUtil = require("../../../utils/ingest/retrieveItemAndFormatUtil");
+const checkTickerExistsUtil = require('../../../utils/ingest/checkTickerExistsUtil');
 
 // Creation of dicts for item retrieval
 
@@ -57,6 +58,8 @@ const ingest10K10QDocsService = async (ticker) => {
       await databaseServices.companySerices.getCompanyTickerById(ticker);
     const company_id = companyObject.id;
     const filings = await formatFilingsService(ticker, false, true, false, 3);
+
+    checkTickerExistsUtil(filings);
 
     let documentsWithMetadata = [];
 

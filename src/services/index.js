@@ -7,7 +7,7 @@
 // Database services
 
 const { databaseServices } = require('./databaseService');
-const { ingestService } = require('./ingestService');
+const { ingestServices } = require('./ingestServices');
 
 // Ingest Services
 
@@ -16,5 +16,5 @@ const { ingestService } = require('./ingestService');
 
 module.exports = {
     databaseServices,
-    ingestService,
+    ingestServices,
 }

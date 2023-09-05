@@ -11,6 +11,7 @@ const {
 const https = require("https");
 const zlib = require("zlib");
 const createDocumentWithMetadataUtil = require("../../../utils/ingest/createDocumentWithMetadataUtil");
+const checkTickerExistsUtil = require('../../../utils/ingest/checkTickerExistsUtil');
 
 // This function ingests the 13f docs
 
@@ -20,6 +21,8 @@ const ingest13FDocsService = async (ticker) => {
       await databaseServices.companySerices.getCompanyTickerById(ticker);
     const company_id = companyObject.id;
     const filings = await formatFilingsService(ticker, false, true, false, 3);
+
+    checkTickerExistsUtil(filings);
 
     let documentsWithMetadata = [];
 
