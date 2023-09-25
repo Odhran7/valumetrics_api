@@ -9,6 +9,8 @@ const { PineconeStore } = require("langchain/vectorstores/pinecone");
 
 // Specify the index we are connecting to
 
+pineconeClient.projectName = "demo";
+
 const index = pineconeClient.Index("demo");
 
 // This function ingest docs with a load of metadata into vector db

@@ -1,19 +1,11 @@
-const fs = require("fs");
+// This config file is for the limiter to the api
+
 const Bottleneck = require("bottleneck");
 
-// Parse the config file
-
-let rawConfig = fs.readFileSync("config.json");
-let config = JSON.parse(rawConfig);
-
-// Configure the limiter
-
 const limiter = new Bottleneck({
-  minTime: config.limiter.minTime,
+  minTime: 110
 });
 
-// Export the limiter
-
 module.exports = {
-    limiter,
-}
+  limiter,
+};

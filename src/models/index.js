@@ -31,7 +31,7 @@ CompanyDocument.hasOne(Company, {
     onDelete: 'CASCADE',
 });
 
-Document.belongsTo(CompanyDocument, {
+Vector.belongsTo(CompanyDocument, {
     foreignKey: 'company_id',
     onDelete: 'CASCADE',
 });

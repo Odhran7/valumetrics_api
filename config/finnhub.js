@@ -1,7 +1,7 @@
 // This util exports config for the finnhub client
 
 const dotenv = require("dotenv");
-const modules = require("sec-api");
+const finnhub = require("finnhub");
 
 dotenv.config();
 

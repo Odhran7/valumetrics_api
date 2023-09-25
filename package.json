@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init-db": "node init.js"
+    "init-db": "node ./scripts/dbConfig.js",
+    "reset-pinecons": "node ./scripts/resetIndex.js",
+    "start": "node ./src/app.js",
+    "lint": "eslint ./src/**/*.{js,jsx}"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +28,7 @@
     "html-to-text": "^9.0.5",
     "langchain": "^0.0.142",
     "natural": "^6.7.1",
+    "node-fetch": "^3.3.2",
     "pdfjs-dist": "^3.10.111",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
@@ -33,5 +38,12 @@
     "stopword": "^2.0.8",
     "xml2js": "^0.6.2",
     "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-import": "^2.28.1"
   }
 }

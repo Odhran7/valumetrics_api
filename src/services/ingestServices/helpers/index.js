@@ -4,17 +4,17 @@
 
 // Helper Services
 
-const { ingestDocs, ingestDoc } = require("./helpers/ingestPineconeService");
-const { ingest8KDocsService } = require("./helpers/ingest8kDocsService");
+const { ingestDocs, ingestDoc } = require("./ingestPineconeService");
+const { ingest8KDocsService } = require("./ingest8kDocsService");
 const {
   ingest10K10QDocsService,
-} = require("./helpers/ingest10k10qDocsService");
-const { ingest13FDocsService } = require("./helpers/ingest13fDocsService");
+} = require("./ingest10k10qDocsService");
+const { ingest13FDocsService } = require("./ingest13fDocsService");
 const {
   ingestEarningsTranscriptsService,
-} = require("./helpers/ingestEarningsTranscriptsService");
-const { ingestNewsService } = require("./helpers/ingestNewsService");
-const { ingestPatentsService } = require("./helpers/ingestPatentsService");
+} = require("./ingestEarningsTranscriptsService");
+const { ingestNewsService } = require("./ingestNewsService");
+const { ingestPatentsService } = require("./ingestPatentsService");
 
 // Define the ingest function
 

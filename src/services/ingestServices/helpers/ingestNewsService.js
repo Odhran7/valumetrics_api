@@ -10,7 +10,11 @@ const {
   formatPolygonSixMonthsUtil,
 } = require("../../../utils/ingest/formatPolygonSixMonthsUtil");
 const polygonConfig = require("../../../../config/polygon");
-const { extract } = require("@extractus/article-extractor");
+// Since extract requires esm
+let extract;
+import("@extractus/article-extractor").then(module => {
+  extract = module.extract;
+});
 const { convert } = require("html-to-text");
 
 // This function is used to ingest the news articles
