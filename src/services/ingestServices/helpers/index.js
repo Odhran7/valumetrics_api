@@ -4,29 +4,25 @@
 
 // Helper Services
 
-const { ingestDocs, ingestDoc } = require("./ingestPineconeService");
-const { ingest8KDocsService } = require("./ingest8kDocsService");
-const {
-  ingest10K10QDocsService,
-} = require("./ingest10k10qDocsService");
-const { ingest13FDocsService } = require("./ingest13fDocsService");
-const {
-  ingestEarningsTranscriptsService,
-} = require("./ingestEarningsTranscriptsService");
-const { ingestNewsService } = require("./ingestNewsService");
-const { ingestPatentsService } = require("./ingestPatentsService");
+import { ingestDocs, ingestDoc } from "./ingestPineconeService";
+import { ingest8KDocsService } from "./ingest8kDocsService";
+import { ingest10K10QDocsService } from "./ingest10k10qDocsService";
+import { ingest13FDocsService } from "./ingest13fDocsService";
+import { ingestEarningsTranscriptsService } from "./ingestEarningsTranscriptsService";
+import { ingestNewsService } from "./ingestNewsService";
+import { ingestPatentsService } from "./ingestPatentsService";
 
 // Define the ingest function
 
-const ingest = async (ticker) => {
+const ingest = async (ticker, databaseServices) => {
   try {
     // Sequential Execution:
-    await ingest8KDocsService(ticker);
-    await ingest10K10QDocsService(ticker);
-    await ingest13FDocsService(ticker);
-    await ingestEarningsTranscriptsService(ticker);
-    await ingestNewsService(ticker);
-    await ingestPatentsService(ticker);
+    await ingest8KDocsService(ticker, databaseServices);
+    await ingest10K10QDocsService(ticker, databaseServices);
+    await ingest13FDocsService(ticker, databaseServices);
+    await ingestEarningsTranscriptsService(ticker, databaseServices);
+    await ingestNewsService(ticker, databaseServices);
+    await ingestPatentsService(ticker, databaseServices);
 
     // Parallel Execution - Once it works lol
     /*
@@ -56,7 +52,7 @@ const ingest = async (ticker) => {
 
 // Export the services
 
-module.exports = {
+export {
   ingestDoc,
   ingestDocs,
   ingest8KDocsService,

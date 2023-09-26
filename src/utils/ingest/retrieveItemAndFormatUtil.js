@@ -1,8 +1,8 @@
 // This util retrieves an item from the appropriate dict and formats it before returning the docs
 
-const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
-const { Document } = require("langchain/document");
-const rateLimitSecApiUtil = require('./rateLimitSecApiUtil');
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { Document } from "langchain/document";
+import rateLimitSecApiUtil from "./rateLimitSecApiUtil";
 
 const retrieveItemAndFormatUtil = async (
   link,
@@ -10,7 +10,7 @@ const retrieveItemAndFormatUtil = async (
   document_id,
   ticker,
   type,
-  year,
+  year
 ) => {
   try {
     const textSplitter = new RecursiveCharacterTextSplitter({
@@ -20,11 +20,7 @@ const retrieveItemAndFormatUtil = async (
     let allDocumentsWithMetadata = [];
 
     for (const item of items) {
-      const sectionText = await rateLimitSecApiUtil(
-        link,
-        item,
-        "text"
-      );
+      const sectionText = await rateLimitSecApiUtil(link, item, "text");
       const metadata = {
         id: document_id,
         ticker: ticker,
@@ -64,4 +60,4 @@ const retrieveItemAndFormatUtil = async (
   }
 };
 
-module.exports = retrieveItemAndFormatUtil;
+export default retrieveItemAndFormatUtil;

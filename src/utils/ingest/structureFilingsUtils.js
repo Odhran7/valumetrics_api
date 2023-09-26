@@ -46,6 +46,4 @@ const structureFilingsUtil = (filingsByYear, isEightK) => {
   return filingLinksByYearAndFormType;
 };
 
-module.exports = {
-  structureFilingsUtil,
-};
+export { structureFilingsUtil };

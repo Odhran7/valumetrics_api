@@ -1,21 +1,18 @@
 // This service will be used to ingest the 13f docs
 
-const { limiter } = require("../../../../config/bottleneck");
-const { ingestDocs } = require("./ingestPineconeService");
-const { formatFilingsService } = require("./formatFilingsService");
-const { databaseServices } = require("../..");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const https = require("https");
-const zlib = require("zlib");
-const createDocumentWithMetadataUtil = require("../../../utils/ingest/createDocumentWithMetadataUtil");
-const checkTickerExistsUtil = require('../../../utils/ingest/checkTickerExistsUtil');
+import { limiter } from "../../../../config/bottleneck";
+import { ingestDocs } from "./ingestPineconeService";
+import { formatFilingsService } from "./formatFilingsService";
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import https from "https";
+import zlib from "zlib";
+import createDocumentWithMetadataUtil from "../../../utils/ingest/createDocumentWithMetadataUtil";
+import checkTickerExistsUtil from "../../../utils/ingest/checkTickerExistsUtil";
 
 // This function ingests the 13f docs
 
-const ingest13FDocsService = async (ticker) => {
+const ingest13FDocsService = async (ticker, databaseServices) => {
   try {
     const companyObject =
       await databaseServices.companySerices.getCompanyTickerById(ticker);
@@ -37,6 +34,7 @@ const ingest13FDocsService = async (ticker) => {
                 year,
                 link.html,
                 link.month,
+                databaseServices,
               );
               const content = await get13FContent(link.txt);
               return await retrieveItemAndFormat13F(
@@ -46,7 +44,8 @@ const ingest13FDocsService = async (ticker) => {
                 ticker,
                 "13-F",
                 year,
-                content
+                content,
+                databaseServices
               );
             } catch (error) {
               console.error(
@@ -94,7 +93,7 @@ const get13FContent = async (url) => {
   }
 };
 
-// This function gets the data and parses it correctly 
+// This function gets the data and parses it correctly
 
 const getData = (url) => {
   return limiter.schedule(() => {
@@ -145,7 +144,8 @@ const retrieveItemAndFormat13F = async (
   ticker,
   type,
   year,
-  content
+  content,
+  databaseServices
 ) => {
   try {
     const metadata = {
@@ -159,7 +159,8 @@ const retrieveItemAndFormat13F = async (
 
     const documentsWithMetadata = await createDocumentWithMetadataUtil(
       content,
-      metadata
+      metadata,
+      databaseServices
     );
 
     if (!documentsWithMetadata.length) {
@@ -175,6 +176,4 @@ const retrieveItemAndFormat13F = async (
   }
 };
 
-module.exports = {
-  ingest13FDocsService,
-};
+export { ingest13FDocsService };

@@ -6,15 +6,14 @@
 
 // Database services
 
-const { databaseServices } = require("./databaseService");
+import { databaseServices } from './databaseService';
 
 // Ingest Services
 
-const { ingestServices } = require("./ingestServices/helpers");
+import { ingestServices } from './ingestServices/helpers';
 
 // Export the services
-
-module.exports = {
+export {
   databaseServices,
-  ingestServices,
+  ingestServices
 };

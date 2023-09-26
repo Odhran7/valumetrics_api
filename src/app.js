@@ -1,8 +1,7 @@
 // Main application file
 
-const { ingestRoutes } = require('./routes/index');
-
-const express = require("express");
+import { ingestRoutes } from "./routes/index";
+import express from "express";
 
 const app = express();
 const PORT = 3000;

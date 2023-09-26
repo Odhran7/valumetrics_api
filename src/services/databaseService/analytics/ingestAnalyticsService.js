@@ -1,6 +1,6 @@
 // Service will be used to handle ingestion of data analytics
 
-const { IngestAnalytic } = require("../../../models")
+import { IngestAnalytic } from "../../../models";
 
 // This function creates an ingest time analytics
 
@@ -44,7 +44,7 @@ const getAnalyticByTicker = async (ticker) => {
 
 // Exporting the modules
 
-module.exports = {
+export {
     createIngestAnalytic,
     getAnalyticById,
     getAnalyticByTicker,

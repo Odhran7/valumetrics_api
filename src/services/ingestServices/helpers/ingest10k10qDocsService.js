@@ -1,14 +1,11 @@
 // This module gets all the 10K & 10Q records for a specific company
 
-const { ingestDocs } = require("./ingestPineconeService");
-const { formatFilingsService } = require("./formatFilingsService");
-const { databaseServices } = require("../..");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const retrieveItemAndFormatUtil = require("../../../utils/ingest/retrieveItemAndFormatUtil");
-const checkTickerExistsUtil = require('../../../utils/ingest/checkTickerExistsUtil');
+import { ingestDocs } from "./ingestPineconeService";
+import { formatFilingsService } from "./formatFilingsService";
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import retrieveItemAndFormatUtil from "../../../utils/ingest/retrieveItemAndFormatUtil";
+import checkTickerExistsUtil from "../../../utils/ingest/checkTickerExistsUtil";
 
 // Creation of dicts for item retrieval
 
@@ -52,7 +49,7 @@ const itemDict10Q = {
 
 // This function ingests 10K 10Q docs into the system
 
-const ingest10K10QDocsService = async (ticker) => {
+const ingest10K10QDocsService = async (ticker, databaseServices) => {
   try {
     const companyObject =
       await databaseServices.companySerices.getCompanyTickerById(ticker);
@@ -72,7 +69,8 @@ const ingest10K10QDocsService = async (ticker) => {
               "10-Q",
               year,
               link.html,
-              link.month
+              link.month,
+              databaseServices
             );
             const itemNumbersConverted = Object.keys(itemDict10Q);
             return await retrieveItemAndFormatUtil(
@@ -121,6 +119,4 @@ const ingest10K10QDocsService = async (ticker) => {
   }
 };
 
-module.exports = {
-  ingest10K10QDocsService,
-};
+export { ingest10K10QDocsService };

@@ -1,8 +1,7 @@
 // Model for the vectors for storing the ids post-ingest
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../../../config/sequelize');
-const CompanyDocument = require('./companyDocumentModel');
+import { DataTypes } from "sequelize";
+import sequelize from "../../../config/sequelize";
 
 const Vector = sequelize.define('Vector', {
     id: {
@@ -13,4 +12,4 @@ const Vector = sequelize.define('Vector', {
     document_id: DataTypes.INTEGER
 });
 
-module.exports = Vector;
+export default Vector;

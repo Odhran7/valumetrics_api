@@ -11,4 +11,4 @@ const extractDate = (dateStr) => {
   };
 };
 
-module.exports = extractDate;
+export default extractDate;

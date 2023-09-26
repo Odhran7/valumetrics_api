@@ -1,13 +1,9 @@
 // This util groups together the filings by year with link, html, txt and the month
 
-const { queryApi } = require("../../../../config/secApi");
-const {
-  getDateXYearsAgoUtil,
-} = require("../../../utils/ingest/getDateXYearsAgoUitl");
-const { groupByYearUtil } = require("../../../utils/ingest/groupByYearUtil");
-const {
-  structureFilingsUtil,
-} = require("../../../utils/ingest/structureFilingsUtils");
+import { queryApi } from "../../../../config/secApi";
+import { getDateXYearsAgoUtil } from "../../../utils/ingest/getDateXYearsAgoUitl";
+import { groupByYearUtil } from "../../../utils/ingest/groupByYearUtil";
+import { structureFilingsUtil } from "../../../utils/ingest/structureFilingsUtils";
 
 // This function selects the correct query to pass to the sec api
 
@@ -84,6 +80,4 @@ const formatFilingsService = async (
   }
 };
 
-module.exports = {
-  formatFilingsService,
-};
+export { formatFilingsService };

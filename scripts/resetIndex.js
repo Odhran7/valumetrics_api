@@ -1,26 +1,27 @@
 // This util wipes the entire vector db -> ONLY USE IF YOU KNOW WHAT YOU ARE DOING
 
-const { PineconeClient } = require("@pinecone-database/pinecone");
-const dotenv = require('dotenv');
+import { PineconeClient } from "@pinecone-database/pinecone";
+import dotenv from "dotenv";
 
-dotenv.config({ path: "../../.env" });
+// Setting the env variables
+
+dotenv.config();
 
 async function deleteIndex() {
-    const client = new PineconeClient();
-    await client.init({
-        apiKey: process.env.PINECONE_API_KEY,
-        environment: process.env.PINECONE_ENVIRONMENT,
-    });
-    const pineconeIndex = client.Index(process.env.PINECONE_INDEX_NAME);
-    indexDeleteResponse = pineconeIndex.delete1({
-        deleteAll: true,
-    });
-    return indexDeleteResponse;
+  const client = new PineconeClient();
+  await client.init({
+    apiKey: process.env.PINECONE_API_KEY,
+    environment: process.env.PINECONE_ENVIRONMENT,
+  });
+  const pineconeIndex = client.Index(process.env.PINECONE_INDEX_NAME);
+  indexDeleteResponse = pineconeIndex.delete1({
+    deleteAll: true,
+  });
+  return indexDeleteResponse;
 }
 
+deleteIndex()
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
 
-deleteIndex().then((response) => console.log(response)).catch((error) => console.error(error));
-
-module.exports = {
-    deleteIndex,
-}
+export { deleteIndex };

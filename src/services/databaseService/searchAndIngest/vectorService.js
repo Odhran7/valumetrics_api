@@ -1,6 +1,6 @@
 // This service is used for the retrieval and creation of vectors
 
-const { Vector } = require("../../../models");
+import { Vector } from "../../../models";
 
 // Function used to create a Vector
 
@@ -60,7 +60,7 @@ const getVectorsByDocumentIds = async (ids) => {
 
 // Exporting the functions
 
-module.exports = {
+export {
   createVector,
   getVectorById,
   getVectorByDocumentId,

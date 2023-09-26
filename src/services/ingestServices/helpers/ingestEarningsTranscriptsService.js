@@ -1,16 +1,15 @@
-const { ingestDocs } = require("./ingestPineconeService");
-const { databaseServices } = require("../..");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const https = require("https");
-const createDocumentWithMetadataUtil = require("../../../utils/ingest/createDocumentWithMetadataUtil");
-const financialModellingPrepConfig = require("../../../../config/financialModellingApi");
+// This function handles the ingestion of earnings transcripts
+
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import https from "https";
+import createDocumentWithMetadataUtil from "../../../utils/ingest/createDocumentWithMetadataUtil";
+import financialModellingPrepConfig from "../../../../config/financialModellingApi";
+import { ingestDocs } from "./ingestPineconeService";
 
 // This function handles the ingestion of earnings transcripts
 
-const ingestEarningsTranscriptsService = async (ticker) => {
+const ingestEarningsTranscriptsService = async (ticker, databaseServices) => {
   let processedData = [];
   try {
     const company_id_obj =
@@ -26,7 +25,8 @@ const ingestEarningsTranscriptsService = async (ticker) => {
         "Earnings Transcript",
         year,
         "Unavailable",
-        quarter
+        quarter,
+        databaseServices
       );
       const response = await getEarningsTranscript(ticker, quarter, year);
 
@@ -140,6 +140,4 @@ const getEarningsTranscript = async (ticker, quarter, year) => {
   });
 };
 
-module.exports = {
-  ingestEarningsTranscriptsService,
-};
+export { ingestEarningsTranscriptsService };

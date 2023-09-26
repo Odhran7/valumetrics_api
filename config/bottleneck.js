@@ -1,11 +1,9 @@
 // This config file is for the limiter to the api
 
-const Bottleneck = require("bottleneck");
+import Bottleneck from "bottleneck";
 
 const limiter = new Bottleneck({
-  minTime: 110
+  minTime: 110,
 });
 
-module.exports = {
-  limiter,
-};
+export { limiter };

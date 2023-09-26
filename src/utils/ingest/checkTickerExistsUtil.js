@@ -6,4 +6,4 @@ const checkTickerExists = (filings) => {
   }
 };
 
-module.exports = checkTickerExists;
+export default checkTickerExists;

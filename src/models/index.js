@@ -1,7 +1,7 @@
 // Main file for exporting the models
 
-const { Sequelize } = require("sequelize");
-const sequelize = require("../../config/sequelize");
+import Sequelize from "sequelize";
+import sequelize from "../../config/sequelize";
 
 // Import the models
 
@@ -27,19 +27,18 @@ Vector.belongsTo(CompanyDocument, {
 // Company id in companies to doc
 
 CompanyDocument.hasOne(Company, {
-    foreignKey: 'company_id',
-    onDelete: 'CASCADE',
+  foreignKey: "company_id",
+  onDelete: "CASCADE",
 });
 
 Vector.belongsTo(CompanyDocument, {
-    foreignKey: 'company_id',
-    onDelete: 'CASCADE',
+  foreignKey: "company_id",
+  onDelete: "CASCADE",
 });
-
 
 // Export the models
 
-module.exports = {
+export {
   sequelize,
   Sequelize,
   CompanyDocument,

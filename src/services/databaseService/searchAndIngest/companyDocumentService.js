@@ -1,6 +1,6 @@
 // Service will be used to handle the creation and retrievel of company documents
 
-const { CompanyDocument } = require("../../../models");
+import { CompanyDocument } from "../../../models";
 
 // Function used to create a company document
 
@@ -70,7 +70,9 @@ const getCompanyDocumentsByDocumentType = async (company_id, docType) => {
     });
     return companyDocument;
   } catch (error) {
-    console.log("There was error getting company document by company id and document type");
+    console.log(
+      "There was error getting company document by company id and document type"
+    );
     throw new Error();
   }
 };
@@ -92,18 +94,20 @@ const getCompanyDocumentsByDocumentTypeAndYear = async (
     });
     return companyDocument;
   } catch (error) {
-    console.log("There was error getting company document by company id, document type and year");
+    console.log(
+      "There was error getting company document by company id, document type and year"
+    );
     throw new Error();
   }
 };
 
 // Exporting the modules
 
-module.exports = {
-    createCompanyDocument,
-    getCompanyDocumentById,
-    getCompanyDocumentsByCompanyId,
-    getCompanyDocumentsByTicker,
-    getCompanyDocumentsByDocumentTypeAndYear,
-    getCompanyDocumentsByDocumentType,
+export {
+  createCompanyDocument,
+  getCompanyDocumentById,
+  getCompanyDocumentsByCompanyId,
+  getCompanyDocumentsByTicker,
+  getCompanyDocumentsByDocumentTypeAndYear,
+  getCompanyDocumentsByDocumentType,
 };

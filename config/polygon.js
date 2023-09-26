@@ -1,8 +1,12 @@
 // This is the config file for Polygon news service
 
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 
-module.exports = {
+// Setting the env variables
+
+dotenv.config();
+
+const polygonConfig = {
   polygon: {
     baseURL: "https://api.polygon.io",
     endpoints: {
@@ -12,3 +16,5 @@ module.exports = {
     defaultLimit: 1000,
   },
 };
+
+export { polygonConfig };

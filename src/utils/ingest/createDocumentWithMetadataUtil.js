@@ -1,7 +1,7 @@
 // This util given metadata splits the docs up
 
-const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
-const { Document } = require("langchain/document");
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { Document } from "langchain/document";
 
 const createDocumentWithMetadataUtil = async (content, metadata) => {
   const textSplitter = new RecursiveCharacterTextSplitter({
@@ -19,4 +19,4 @@ const createDocumentWithMetadataUtil = async (content, metadata) => {
   }
 };
 
-module.exports = createDocumentWithMetadataUtil;
+export default createDocumentWithMetadataUtil;

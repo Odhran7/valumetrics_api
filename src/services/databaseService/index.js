@@ -4,19 +4,19 @@
 
 // Ingest and Search services
 
-const companyDocumentService  = require('./searchAndIngest/companyDocumentService');
-const companyService = require('./searchAndIngest/companyService');
-const vectorService = require('./searchAndIngest/vectorService');
+import companyDocumentService from "./searchAndIngest/companyDocumentService";
+import companyService from "./searchAndIngest/companyService";
+import vectorService from "./searchAndIngest/vectorService";
 
 // Analytical services
 
-const ingestAnalyticsService = require('./analytics/ingestAnalyticsService');
+import ingestAnalyticsService from "./analytics/ingestAnalyticsService";
 
 // Export the services
 
-module.exports = {
-    companyDocumentService,
-    companyService,
-    vectorService,
-    ingestAnalyticsService,
-}
+export {
+  companyDocumentService,
+  companyService,
+  vectorService,
+  ingestAnalyticsService,
+};

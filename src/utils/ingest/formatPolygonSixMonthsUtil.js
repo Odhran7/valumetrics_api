@@ -8,4 +8,4 @@ const formatPolygonSixMonthsUtil = () => {
   return formattedSixMonthsAgo;
 };
 
-module.exports = formatPolygonSixMonthsUtil;
+export default formatPolygonSixMonthsUtil;

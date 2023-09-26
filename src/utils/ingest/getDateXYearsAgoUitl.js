@@ -14,6 +14,4 @@ function getDateXYearsAgoUtil(yearsAgo) {
   return `${formattedStartDate} TO ${formattedEndDate}`;
 }
 
-module.exports = {
-  getDateXYearsAgoUtil,
-};
+export { getDateXYearsAgoUtil };

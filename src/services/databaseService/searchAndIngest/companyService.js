@@ -1,6 +1,6 @@
 // This service will be used to handle the creation of companies
 
-const { Company } = require("../../../models");
+import { Company } from "../../../models";
 
 // Function used to create a company
 
@@ -17,12 +17,12 @@ const createCompany = async (data) => {
 // Function used to query company by id
 
 const getCompanyById = async (id) => {
-    try {
-        const company = await Company.findByPk(id);
-        return company;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const company = await Company.findByPk(id);
+    return company;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // Function used to get company id by ticker
@@ -30,9 +30,9 @@ const getCompanyById = async (id) => {
 const getCompanyByTicker = async (ticker) => {
   try {
     const company = Company.findAll({
-        where: {
-            ticker: ticker,
-        }
+      where: {
+        ticker: ticker,
+      },
     });
     return company;
   } catch (error) {
@@ -43,8 +43,4 @@ const getCompanyByTicker = async (ticker) => {
 
 // Export the functions
 
-module.exports = {
-  createCompany,
-  getCompanyById,
-  getCompanyByTicker,
-};
+export { createCompany, getCompanyById, getCompanyByTicker };

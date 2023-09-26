@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init-db": "node ./scripts/dbConfig.js",
-    "reset-pinecons": "node ./scripts/resetIndex.js",
+    "reset-pinecone": "node ./scripts/resetIndex.js",
     "start": "node ./src/app.js",
     "lint": "eslint ./src/**/*.{js,jsx}"
   },

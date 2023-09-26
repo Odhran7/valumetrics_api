@@ -1,7 +1,9 @@
 // This config file is responsible for configuring Pinecone (vector database)
 
-const { PineconeClient } = require("@pinecone-database/pinecone");
-const dotenv = require("dotenv");
+import { PineconeClient } from "@pinecone-database/pinecone";
+import dotenv from "dotenv";
+
+// Setting the env variables
 
 dotenv.config();
 
@@ -25,6 +27,4 @@ const pineconeClient = new PineconeClient();
   }
 })();
 
-module.exports = {
-  pineconeClient,
-};
+export { PineconeClient };

@@ -1,14 +1,11 @@
 // This module gets all the 8K records for a specific company
 
-const { ingestDocs } = require("./ingestPineconeService");
-const { formatFilingsService } = require("./formatFilingsService");
-const { databaseServices } = require("../..");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const retrieveItemAndFormatUtil = require('../../../utils/ingest/retrieveItemAndFormatUtil');
-const checkTickerExistsUtil = require('../../../utils/ingest/checkTickerExistsUtil');
+import { ingestDocs } from "./ingestPineconeService";
+import { formatFilingsService } from "./formatFilingsService";
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import retrieveItemAndFormatUtil from "../../../utils/ingest/retrieveItemAndFormatUtil";
+import checkTickerExistsUtil from "../../../utils/ingest/checkTickerExistsUtil";
 
 // Dict for mapping to sec api item 8k types
 
@@ -96,7 +93,7 @@ Helpful info on the standards applied to an 8k
 
 // This function retrieves and ingests all 8k filings
 
-const ingest8KDocsService = async (ticker) => {
+const ingest8KDocsService = async (ticker, databaseServices) => {
   try {
     const companyObject =
       await databaseServices.companySerices.getCompanyTickerById(ticker);
@@ -117,6 +114,7 @@ const ingest8KDocsService = async (ticker) => {
               year,
               link.html,
               link.month,
+              databaseServices
             );
             const itemNumbersConverted = link.itemNumbers.map(
               (item) => itemDict8K[item]
@@ -147,6 +145,4 @@ const ingest8KDocsService = async (ticker) => {
   }
 };
 
-module.exports = {
-  ingest8KDocsService,
-};
+export { ingest8KDocsService };

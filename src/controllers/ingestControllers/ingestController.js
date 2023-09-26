@@ -1,6 +1,6 @@
 // This is the controller for the ingest function
 
-const { ingestServices } = require("../../services/index");
+import { ingestServices } from "../../services/index";
 
 // This handles GET /api/v1/ingest/ticker=YOUR_TICKER_VALUE
 
@@ -37,4 +37,4 @@ const ingestController = async (req, res) => {
   }
 };
 
-module.exports = ingestController;
+export default ingestController;

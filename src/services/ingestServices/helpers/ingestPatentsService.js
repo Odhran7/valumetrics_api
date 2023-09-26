@@ -1,20 +1,17 @@
 // This service is for ingesting the patents
 
-const { finnhubClient } = require("../../../../config/finnhub");
-const puppeteer = require("puppeteer");
-const pdfjsLib = require("pdfjs-dist");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const { databaseServices } = require("../..");
-const extractDate = require("../../../utils/ingest/extractDateUtil");
-const createDocumentWithMetadataUtil = require("../../../utils/ingest/createDocumentWithMetadataUtil");
-const { ingestDocs } = require("./ingestPineconeService");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
+import { finnhubClient } from "../../../../config/finnhub";
+import puppeteer from "puppeteer";
+import pdfjsLib from "pdfjs-dist";
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import extractDate from "../../../utils/ingest/extractDateUtil";
+import createDocumentWithMetadataUtil from "../../../utils/ingest/createDocumentWithMetadataUtil";
+import { ingestDocs } from "./ingestPineconeService";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
 
 // This function ingests patents into the database
 
-const ingestPatentsService = async (ticker) => {
+const ingestPatentsService = async (ticker, databaseServices) => {
   let processed_data = [];
   try {
     const company_id =
@@ -35,7 +32,8 @@ const ingestPatentsService = async (ticker) => {
           "Intellectual Property",
           dateObj.year,
           patent.article_url,
-          dateObj.month
+          dateObj.month,
+          databaseServices
         );
         const urls = await getPatentInfo(patentNumber, "en");
         if (urls.PatentFilingPdf) {
@@ -49,7 +47,8 @@ const ingestPatentsService = async (ticker) => {
             filingStatus,
             patentNumber,
             "Intellectual Property",
-            dateObj
+            dateObj,
+            databaseServices
           );
           processed_data.push(docs);
         }
@@ -149,7 +148,7 @@ const getPdfContentAsText = async (url) => {
   }
 };
 
- // This formats and creates docs for each patent
+// This formats and creates docs for each patent
 
 const formatAndCreateDocsPatents = async (
   ticker,
@@ -160,7 +159,8 @@ const formatAndCreateDocsPatents = async (
   filingStatus,
   patentNumber,
   type,
-  dateObj
+  dateObj,
+  databaseServices
 ) => {
   try {
     const metadata = {
@@ -181,7 +181,8 @@ const formatAndCreateDocsPatents = async (
     };
     const documentsWithMetadata = await createDocumentWithMetadataUtil(
       pdfContent,
-      metadata
+      metadata,
+      databaseServices
     );
     if (!documentsWithMetadata.length) {
       console.warn(`No patents found for ticker: ${ticker}`);
@@ -202,6 +203,4 @@ const formatAndCreateDocsPatents = async (
   }
 };
 
-module.exports = {
-    ingestPatentsService,
-};
+export { ingestPatentsService };

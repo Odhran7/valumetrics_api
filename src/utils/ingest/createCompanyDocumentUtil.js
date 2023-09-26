@@ -1,8 +1,6 @@
 // This util provides an interface for creating a company document and obtaining the id
 
-const { databaseServices } = require('../../models/')
-
-const createCompanyDocument = async (company_id, type, year, link, month) => {
+const createCompanyDocument = async (company_id, type, year, link, month, databaseServices) => {
     try {
       const companyObject = await databaseServices.companyServices.createCompany({
         company_id: company_id,
@@ -21,5 +19,4 @@ const createCompanyDocument = async (company_id, type, year, link, month) => {
 
   // Exporting the module
 
-  module.exports = createCompanyDocument;
-  
+export default createCompanyDocument;

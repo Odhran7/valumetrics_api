@@ -1,7 +1,7 @@
 // Routes for // GET /api/v1/ingest/
 
-const { ingestControllers } = require('../controllers/index');
-const express = require('express');
+import { ingestControllers } from "../controllers/index";
+import express from "express";
 
 const ingestRouter = express.Router();
 
@@ -14,4 +14,4 @@ router.get('/earnings-transcript/:tickerValue', ingestControllers.ingestEarnings
 router.get('/news/:tickerValue', ingestControllers.ingestNewsController);
 router.get('/patents/:tickerValue', ingestControllers.ingestPatentsController);
 
-module.exports = ingestRouter;
+export default ingestRouter;

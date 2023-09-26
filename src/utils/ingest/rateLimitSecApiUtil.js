@@ -1,6 +1,6 @@
 // This util is used to prevent rate limits from the sec-api
 
-const { extractorApi } = require("../../../config/secApi");
+import { extractorApi } from "../../../config/secApi";
 
 // Timeout for rate limit
 
@@ -25,7 +25,7 @@ const handleRateLimitError = async (error, retries) => {
       console.log(
         `Rate limit error, but retry-after header not present. Retrying in ${retryIn} seconds.`
       );
-      await sleep(retryIn * 1000); 
+      await sleep(retryIn * 1000);
     }
   } else {
     throw error;
@@ -50,5 +50,4 @@ const rateLimitSecApiUtil = async (link, item, format) => {
   throw new Error("Max retries exceeded.");
 };
 
-module.exports = rateLimitSecApiUtil;
-
+export default rateLimitSecApiUtil;

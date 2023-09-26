@@ -36,4 +36,4 @@ const ingestTemplateController = (ingestService, docType) => {
     };
   };
 
-  module.exports = ingestTemplateController;
+export default ingestTemplateController;

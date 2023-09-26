@@ -1,16 +1,13 @@
 // This service is used to ingest content into the vector db
 
-const { pineconeClient } = require("../../../../config/pinecone");
-const { OpenAIEmbeddings } = require("langchain/embeddings/openai");
-const {
-  prepareDocumentForIngestionUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const { PineconeStore } = require("langchain/vectorstores/pinecone");
+import { pineconeClient } from "../../../../config/pinecone";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { prepareDocumentForIngestionUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import { PineconeStore } from "langchain/vectorstores/pinecone";
 
 // Specify the index we are connecting to
 
 pineconeClient.projectName = "demo";
-
 const index = pineconeClient.Index("demo");
 
 // This function ingest docs with a load of metadata into vector db
@@ -57,7 +54,4 @@ const ingestDoc = async (docWithMetadata) => {
   }
 };
 
-module.exports = {
-  ingestDocs,
-  ingestDoc,
-};
+export { ingestDocs, ingestDoc };

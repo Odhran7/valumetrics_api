@@ -12,6 +12,4 @@ const groupByYearUtil = (filings) => {
   return grouped;
 };
 
-module.exports = {
-  groupByYearUtil,
-};
+export { groupByYearUtil };

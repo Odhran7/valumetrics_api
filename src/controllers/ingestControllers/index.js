@@ -2,14 +2,14 @@
 
 // GET /api/v1/ingest/
 
-const { ingestServices } = require("../../services/index");
-const { ingestTemplateController } = require("./ingestTemplateController");
+import { ingestServices } from "../../services/index";
+import { ingestTemplateController } from "./ingestTemplateController";
 
 // Create the controllers
 
 // GET /api/v1/ingest/ticker=YOUR_TICKER_VALUE
 
-const ingestController = require("./ingestController");
+import ingestController from "./ingestController";
 
 // GET /api/v1/ingest/8k/ticker=YOUR_TICKER_VALUE
 
@@ -53,7 +53,7 @@ const ingestPatentsController = ingestTemplateController(
   "patents"
 );
 
-module.exports = {
+export {
   ingestController,
   ingest8kController,
   ingest10k10qController,

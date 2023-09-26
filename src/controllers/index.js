@@ -4,10 +4,8 @@
 
 // Ingest
 
-const { ingestControllers } = require("./ingestControllers/index");
+import { ingestController } from "./ingestControllers/index";
 
 // Export the controllers
 
-module.exports = {
-  ingestControllers,
-};
+export { ingestController };

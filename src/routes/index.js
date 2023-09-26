@@ -2,10 +2,8 @@
 
 // Import the routers
 
-const ingestRoutes = require('./ingestRoutes');
+import ingestRoutes from "./ingestRoutes";
 
 // Export the routes
 
-module.exports = {
-    ingestRoutes,
-}
+export { ingestRoutes };

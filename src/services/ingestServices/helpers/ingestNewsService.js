@@ -1,25 +1,16 @@
 // This service is used to ingest news articles into the vector database
 
-const { ingestDocs } = require("./ingestPineconeService");
-const { databaseServices } = require("../..");
-const createCompanyDocument = require("../../../utils/ingest/createCompanyDocumentUtil");
-const {
-  filterValidDocsUtil,
-} = require("../../../utils/ingest/formatDocsIngestUtil");
-const {
-  formatPolygonSixMonthsUtil,
-} = require("../../../utils/ingest/formatPolygonSixMonthsUtil");
-const polygonConfig = require("../../../../config/polygon");
-// Since extract requires esm
-let extract;
-import("@extractus/article-extractor").then(module => {
-  extract = module.extract;
-});
-const { convert } = require("html-to-text");
+import { ingestDocs } from "./ingestPineconeService";
+import createCompanyDocument from "../../../utils/ingest/createCompanyDocumentUtil";
+import { filterValidDocsUtil } from "../../../utils/ingest/formatDocsIngestUtil";
+import { formatPolygonSixMonthsUtil } from "../../../utils/ingest/formatPolygonSixMonthsUtil";
+import polygonConfig from "../../../../config/polygon";
+import { convert } from "html-to-text";
+import { extract } from "@extractus/article-extractor";
+import createDocumentWithMetadataUtil from "../../../utils/ingest/createDocumentWithMetadataUtil";
 
 // This function is used to ingest the news articles
-
-const ingestNewsService = async (ticker) => {
+const ingestNewsService = async (ticker, databaseServices) => {
   try {
     const companyObject =
       await databaseServices.companySerices.getCompanyTickerById(ticker);
@@ -42,8 +33,7 @@ const ingestNewsService = async (ticker) => {
 };
 
 // This formats the articles and obtains the info needed for the metadata
-
-const formatArticles = async (articles, company_id, ticker) => {
+const formatArticles = async (articles, company_id, ticker, databaseServices) => {
   try {
     return Promise.all(
       articles.map(async (article) => {
@@ -57,7 +47,8 @@ const formatArticles = async (articles, company_id, ticker) => {
           "News Article",
           year,
           article_url,
-          month
+          month,
+          databaseServices
         );
         return extractContentAndIngest(
           company_id,
@@ -79,7 +70,6 @@ const formatArticles = async (articles, company_id, ticker) => {
 };
 
 // This function gets the content, formats the documents AND ingests it
-
 const extractContentAndIngest = async (
   company_id,
   ticker,
@@ -108,7 +98,8 @@ const extractContentAndIngest = async (
     };
     const documentsWithMetadata = await createDocumentWithMetadataUtil(
       text,
-      metadata
+      metadata,
+      databaseServices
     );
     if (!documentsWithMetadata.length) {
       console.warn(`No news articles found for ticker: ${ticker}`);
@@ -126,6 +117,4 @@ const extractContentAndIngest = async (
   }
 };
 
-module.exports = {
-  ingestNewsService,
-};
+export { ingestNewsService };

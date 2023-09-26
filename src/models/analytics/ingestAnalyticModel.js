@@ -1,7 +1,7 @@
 // Analytics for time to ingest
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../../../config/sequelize');
+import { DataTypes } from 'sequelize';
+import sequelize from '../../../config/sequelize';
 
 const IngestAnalytic = sequelize.define('IngestAnalytics', {
     id: {
@@ -16,4 +16,4 @@ const IngestAnalytic = sequelize.define('IngestAnalytics', {
     time_to_ingest: DataTypes.TIME,
 });
 
-module.exports = IngestAnalytic;
+export default IngestAnalytic
